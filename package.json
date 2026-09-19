@@ -1,0 +1,28 @@
+{
+  "name": "secureid",
+  "version": "1.0.0",
+  "description": "SecureID — IAM Registration & Login Journey (Supabase Postgres + email/SMS OTP + TOTP MFA + JWT sessions)",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "db:migrate": "node server/db/migrate.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "nanoid": "^3.3.7",
+    "nodemailer": "^10.0.10",
+    "otplib": "^12.0.1",
+    "pg": "^8.23.0",
+    "qrcode": "^1.5.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

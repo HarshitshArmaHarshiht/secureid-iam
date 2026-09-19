@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SecureID — Login</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><text y=%2218%22 font-size=%2218%22>🛡️</text></svg>" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Brand sidebar (desktop only) -->
+  <aside class="brandpane">
+    <div class="brandpane-inner">
+      <div class="brand">
+        <span class="brand-shield">🛡</span>
+        <span class="brand-name">SecureID</span>
+      </div>
+      <p class="brand-tagline">Secure access to your account</p>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <header class="mobilebar">
+      <div class="brand brand--compact">
+        <span class="brand-shield">🛡</span>
+        <span class="brand-name">SecureID</span>
+      </div>
+    </header>
+
+    <div class="card-wrap">
+      <div class="card">
+
+        <!-- ============ SCREEN 1: CREDENTIALS ============ -->
+        <section class="screen active" data-screen="credentials">
+          <div class="screen-icon icon-brand">🔒</div>
+          <h1>Welcome back</h1>
+          <p class="subtitle">Log in to your SecureID account</p>
+
+          <form id="loginForm" novalidate>
+            <div class="field">
+              <label for="loginEmail">Email</label>
+              <input id="loginEmail" name="email" type="email" autocomplete="email" placeholder="priya.sharma@email.com" required />
+              <span class="field-error" data-error="loginEmail"></span>
+            </div>
+
+            <div class="field">
+              <label for="loginPassword">Password</label>
+              <div class="password-row">
+                <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required />
+                <button type="button" class="eye-toggle" id="loginEyeToggle" aria-label="Show password" aria-pressed="false">👁</button>
+              </div>
+              <span class="field-error" data-error="loginPassword"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="loginSubmit">
+              <span class="btn-label">Log In</span>
+              <span class="spinner" hidden></span>
+            </button>
+
+            <p class="foot-note">Don't have an account? <a href="/index.html">Create one</a></p>
+          </form>
+        </section>
+
+        <!-- ============ SCREEN 2: MFA ============ -->
+        <section class="screen" data-screen="mfa">
+          <div class="screen-icon icon-brand">🛡</div>
+          <h1>Two-factor authentication</h1>
+          <p class="subtitle" id="mfaSubtitle">Enter the code from your authenticator app</p>
+
+          <form id="loginMfaForm" novalidate>
+            <div class="otp-boxes" data-otp-group="login-mfa"></div>
+            <p class="otp-status" id="mfaStatus"></p>
+            <p class="otp-timer" id="mfaTimerWrap" hidden>Code expires in <span class="timer" id="mfaTimer">02:45</span></p>
+
+            <button type="submit" class="btn btn-primary" id="mfaSubmit">
+              <span class="btn-label">Verify &amp; Continue</span>
+              <span class="spinner" hidden></span>
+            </button>
+
+            <p class="foot-note">
+              <button type="button" class="link-btn" id="backToLogin">Back to login</button>
+            </p>
+          </form>
+        </section>
+
+        <!-- ============ SCREEN 3: LOGGED IN ============ -->
+        <section class="screen" data-screen="dashboard">
+          <div class="screen-icon icon-success icon-lg">✓</div>
+          <h1>You're logged in</h1>
+          <p class="subtitle">This page is served from your authenticated session.</p>
+
+          <dl class="account-summary" id="accountSummary"></dl>
+
+          <p class="foot-note faint">
+            Loaded from <code>GET /api/me</code>, which identifies you from the
+            HttpOnly session cookie. No token is stored in JavaScript.
+          </p>
+
+          <button type="button" class="btn btn-primary" id="logoutBtn">
+            <span class="btn-label">Log Out</span>
+            <span class="spinner" hidden></span>
+          </button>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="page-footer">© 2024 SecureID. All rights reserved.</footer>
+  </main>
+</div>
+
+<template id="otpBoxTemplate">
+  <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box" autocomplete="one-time-code" />
+</template>
+
+<script src="/js/login.js"></script>
+</body>
+</html>
